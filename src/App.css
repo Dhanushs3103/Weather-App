@@ -1,0 +1,58 @@
+.inputStyle::placeholder {
+   color: #101010;
+  }
+
+.linkStyle:hover {
+  transition: color 0.5s;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.search-bar {
+   border-radius: 30px;
+   width: fit-content !important;
+   padding-right: 20px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   margin-top: 20px !important;
+   backdrop-filter: blur(60px);
+}
+
+.search-input{
+   border: 0 !important;
+   font-size: 25px !important;
+   border-radius: 30px !important; 
+   font-weight: bold;
+}
+
+.search-input:focus{
+   outline:none !important;
+}
+
+.search-input::placeholder {
+   color: #333333;
+   font-weight: bold;
+  }
+
+.search-icon {
+  color: #101010 !important;
+  font-size: 25px;
+  margin-top: 18px;
+  cursor: pointer;
+}
+
+.search-icon:hover {
+  transition: color 0.5s;
+  transform: scale(0.9);
+
+}
+
+.celsius {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 10px;
+}
+
+sup {
+  font-size: 15px;
+}
