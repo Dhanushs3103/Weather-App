@@ -25,8 +25,8 @@
 #### Home Page :
 ![Home page](/images/home.png)
 #### Weather Page :
-![weather page](/Weather-App/images/wether.png)
+![weather page](/images/wether.png)
 #### Login Page :
-![login page](/Weather-App/images/login.png)
+![login page](/images/login.png)
 
 #### Thank you.
