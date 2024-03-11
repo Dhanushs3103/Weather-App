@@ -23,7 +23,7 @@
 
 #### Images of the websites
 #### Home Page :
-![Home page](/Weather-App/images/home.png)
+![Home page](/images/home.png)
 #### Weather Page :
 ![weather page](/Weather-App/images/wether.png)
 #### Login Page :
