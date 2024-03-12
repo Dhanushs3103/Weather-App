@@ -1,8 +1,7 @@
 // packages
-import React from 'react'
 import { Input,Stack,Grid, GridItem,Text } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import axios from 'axios'
 
 // Local Imports
@@ -12,8 +11,12 @@ import '../App.css'
 import Bengaluru from '../components/Bengaluru'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
+import Success from '../components/Success'
+import { AuthContext } from '../Contexts/AuthContext'
 
 export default function Weather() {
+
+  let {login} = useContext(AuthContext)
 
   let [loading, setLoading] = useState(false)
   let [error, setError] = useState(false)
@@ -94,6 +97,8 @@ let sunsetImg = "https://cdn-icons-png.freepik.com/512/577/577600.png";
 
 
   return (
+    <>
+    {login && <Success/>}
     <div style={{ backgroundImage: `url('https://images.pexels.com/photos/672451/pexels-photo-672451.jpeg')`, backgroundSize:"cover", backgroundPosition: 'center', width: '100vw', height: '100vh'}}>
       <Navbar/>
       <Stack className='search-bar' direction={"row"} h={"fit-content"}  margin={"auto"} justifyContent={"center"}>
@@ -154,5 +159,7 @@ let sunsetImg = "https://cdn-icons-png.freepik.com/512/577/577600.png";
     )
       )}
     </div>
-  )
+
+    </>
+      )
 }
