@@ -1,37 +1,39 @@
+
+
 .inputStyle::placeholder {
-   color: #101010;
-  }
+  color: #101010;
+}
 
 .linkStyle:hover {
   transition: color 0.5s;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
 }
 
 .search-bar {
-   border-radius: 30px;
-   width: fit-content !important;
-   padding-right: 20px;
-   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-   margin-top: 20px !important;
-   backdrop-filter: blur(60px);
+  border-radius: 30px;
+  width: fit-content !important;
+  padding-right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 20px !important;
+  backdrop-filter: blur(60px);
 }
 
-.search-input{
-   border: 0 !important;
-   font-size: 25px !important;
-   border-radius: 30px !important; 
-   font-weight: bold;
+.search-input {
+  border: 0 !important;
+  font-size: 25px !important;
+  border-radius: 30px !important;
+  font-weight: bold;
 }
 
-.search-input:focus{
-   outline:none !important;
+.search-input:focus {
+  outline: none !important;
 }
 
 .search-input::placeholder {
-   color: #333333;
-   font-weight: bold;
-  }
+  color: #333333;
+  font-weight: bold;
+}
 
 .search-icon {
   color: #101010 !important;
@@ -43,7 +45,6 @@
 .search-icon:hover {
   transition: color 0.5s;
   transform: scale(0.9);
-
 }
 
 .celsius {
@@ -55,4 +56,44 @@
 
 sup {
   font-size: 15px;
+}
+
+/* Add grid container and grid item styles */
+.grid-container {
+  margin: auto;
+  margin-top: 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.grid-item {
+  backdrop-filter: blur(40px);
+  border-radius: 40px;
+}
+
+/* Responsive styling for grid cells */
+
+/* For small screens (max-width: 768px) */
+@media only screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-item {
+    width: 200px;
+  }
+}
+
+/* For extra small screens (max-width: 480px) */
+@media only screen and (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-item {
+    width: 150px;
+  }
 }
