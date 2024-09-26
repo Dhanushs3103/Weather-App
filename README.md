@@ -1,6 +1,6 @@
 # `WeatherWise`
 
-### `WeatherWise`  is an weather website where you can get the accurate weather report based on your input.
+### `WeatherWise`  is an Full-Stack weather website where you can get the accurate weather report based on your input.
 
 ## Tech stack used:
   - `React.js`
@@ -8,10 +8,16 @@
   - `React Router Dom`
   - `Axios`
   - `OpenWeather API` (for Data)
+  - `Node.js`
+  - `MongoDB`
+  - `Express.js`
+  - `Mongoose`
 
 
 ## Functionality
   - Login
+  - Logout
+  - Registration
   - Routing (Navigating between the pages)
   - Data Fetching from the OpenWeather API
   - Private Routing
@@ -28,5 +34,6 @@
 ![weather page](/images/wether.png)
 #### Login Page :
 ![login page](/images/login.png)
-
+#### Registration Page :
+![login page](/images/register.png)
 #### Thank you.
