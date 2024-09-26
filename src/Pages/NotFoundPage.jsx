@@ -3,7 +3,20 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 
 export default function NotFoundPage() {
   return (
-    <div style={{backgroundColor:"#f4dfdd", height:"100vh", display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+    <div
+      style={{
+        backgroundColor: "#f4dfdd",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundImage: `url('https://images.pexels.com/photos/672451/pexels-photo-672451.jpeg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        width: "100vw",
+      }}
+    >
       <div
         style={{
           display: "flex",

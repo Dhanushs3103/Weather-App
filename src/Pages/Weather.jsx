@@ -30,7 +30,7 @@ export default function Weather() {
   let API_KEY = "a4dcbbb5448759a4280c99c54f96ed02"
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${search},&appid=${API_KEY}&units=metric`;
 
-  let cloudImg = "https://cdn-icons-png.freepik.com/512/5903/5903939.png";
+let cloudImg = "https://cdn-icons-png.freepik.com/512/5903/5903939.png";
 let clearImg= "https://cdn-icons-png.freepik.com/512/1400/1400310.png";
 let rainImg = "https://cdn-icons-png.freepik.com/512/4150/4150897.png";
 let showerImg = "https://cdn-icons-png.freepik.com/512/3937/3937493.png"
@@ -44,6 +44,7 @@ let maxTemp = "https://cdn-icons-png.freepik.com/512/5247/5247725.png";
 let minTemp = "https://cdn-icons-png.freepik.com/512/10752/10752743.png";
 let sunriseImg = "https://cdn-icons-png.freepik.com/512/9231/9231550.png";
 let sunsetImg = "https://cdn-icons-png.freepik.com/512/577/577600.png";
+let mistImg = "https://png.pngtree.com/png-clipart/20230823/original/pngtree-daytime-foggy-weather-clouds-illustration-picture-image_8201381.png";
  
   async function handleSearch(){
     setStatus(false);
@@ -92,13 +93,14 @@ let sunsetImg = "https://cdn-icons-png.freepik.com/512/577/577600.png";
       return hazeImg
     }else if (mainImg === "Smoke") {
       return smokeImg
+    }else if (mainImg === "Mist") {
+      return mistImg
     }
   }
 
 
   return (
     <>
-    {login && <Success/>}
     <div style={{ backgroundImage: `url('https://images.pexels.com/photos/672451/pexels-photo-672451.jpeg')`, backgroundSize:"cover", backgroundPosition: 'center', width: '100vw', height: '100vh'}}>
       <Navbar/>
       <Stack className='search-bar' direction={"row"} h={"fit-content"}  margin={"auto"} justifyContent={"center"}>
@@ -114,8 +116,8 @@ let sunsetImg = "https://cdn-icons-png.freepik.com/512/577/577600.png";
           <div style={{textAlign:"center"}} >
           <Grid h='400px'  templateRows='repeat(2, 1fr)' w={"800px"} margin={"auto"}  mt={"50px"} templateColumns='repeat(5, 1fr)' gap={4}>
               {/* left */}
-           <GridItem backdropFilter={"blur(40px)"} height={"100%"} w="300px" rowSpan={2} borderRadius={"40px"} >
-            <img src={imageChecker(weather.weather?.[0].main)} alt={weather.weather?.[0].main} style={{width:"200px", height:"200px" ,marginLeft:"50px", padding:"10px"}} />
+           <GridItem backdropFilter={"blur(40px)"} height={"100%"}  w="300px" rowSpan={2} borderRadius={"40px"} >
+            <img src={imageChecker(weather.weather?.[0].main)} alt={weather.weather?.[0].main} style={{width:"200px", height:"200px" ,marginLeft:"50px", padding:"10px",border:"none"}} />
             <Text fontSize={"40px"} color={"#FFFFFF"} fontWeight={"bold"}>{weather.weather?.[0].main}</Text>
             <Text fontSize={"60px"} color={"#FFFFFF"} fontWeight={"bold"}>{weather.main?.temp}<span className='celsius'>C</span></Text>
            </GridItem>

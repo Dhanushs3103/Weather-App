@@ -1,33 +1,20 @@
-// Packages
-import { createContext,useState } from 'react'
+//packages
+import { createContext, useState } from "react";
 
-
+//creating the context
 export let AuthContext = createContext();
 
-export default function AuthContextProvider({children}) {
-
-
-    let [login ,setLogin] = useState(false);
-
-    function loginUser () {
-        setLogin(true);
-    }
-
-    function logoutUser () {
-        setLogin(false);
-    }
-
-    let contextValues = {
-        login,
-        loginUser,
-        logoutUser
-    }
-
+//creating context provider
+export function AuthContextProvider({ children }) {
+  let [login, setLogin] = useState(false);
+  function handleLogin() {
+    setLogin(true);
+  }
+  function handleLogout() {
+    setLogin(false);
+  }
+  let authValues = { login, handleLogin, handleLogout };
   return (
-    <>
-     <AuthContext.Provider value={contextValues}>
-        {children}
-     </AuthContext.Provider>
-    </>
-  )
+    <AuthContext.Provider value={authValues}>{children}</AuthContext.Provider>
+  );
 }

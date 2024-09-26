@@ -1,7 +1,7 @@
 
 
 .inputStyle::placeholder {
-  color: #101010;
+  color: #504e4e;
 }
 
 .linkStyle:hover {
@@ -20,14 +20,17 @@
 }
 
 .search-input {
-  border: 0 !important;
+  border: transparent !important;
   font-size: 25px !important;
   border-radius: 30px !important;
   font-weight: bold;
+  outline: transparent !important;
 }
 
-.search-input:focus {
+.search-input:focus,
+.search-input:active {
   outline: none !important;
+  border: none !important; /* Optional: Remove border if needed */
 }
 
 .search-input::placeholder {

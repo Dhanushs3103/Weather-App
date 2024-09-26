@@ -11,6 +11,7 @@ import Login from '../Pages/Login'
 import Weather from '../Pages/Weather'
 import PrivateRoute from '../Routes/PrivateRoute'
 import NotFoundPage from '../Pages/NotFoundPage'
+import Register from '../Pages/Register';
 
 export default function AllRoutes() {
   const location = useLocation();
@@ -26,6 +27,7 @@ export default function AllRoutes() {
      <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/weather" element={<PrivateRoute><Weather /></PrivateRoute>} />
       <Route path="*" element={<NotFoundPage />} />
      </Routes>

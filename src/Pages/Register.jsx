@@ -1,5 +1,4 @@
-//packages
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Spinner } from "@chakra-ui/react";
 import {
   Box,
@@ -7,116 +6,109 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Text,
+  Select,
   Button,
-  useToast,
+  Text,
+  useToast
 } from "@chakra-ui/react";
 import axios from "axios";
+import {AuthContext} from "../Contexts/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
 
-//Base URL
+// Base URL
 let URL = `https://weather-app-backend-4hgb.onrender.com`;
 
-//local imports
-import { AuthContext } from "../Contexts/AuthContext.jsx";
-
-function Login() {
-  let navigate = useNavigate();
-  let [loading, setLoading] = useState(false);
-  let { handleLogin } = useContext(AuthContext);
+function Register() {
   let toast = useToast();
+  let navigate = useNavigate();
+  let { handleLogin } = useContext(AuthContext);
+  let [loading, setLoading] = useState(false);
   let [details, setDetails] = useState({
     email: "",
     password: "",
+    userName: "",
+    gender: "",
   });
 
   async function handleSubmit(e) {
+    e.preventDefault();
     setLoading(true);
-    try {
-      e.preventDefault(); // Prevent form submission reloading
-      // console.log(details);
-      if (!details.email || !details.password) {
-        setLoading(false);
-        return toast({
-          title: "Please fill all the fields",
-          status: "warning",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+    // Validate fields
+    if (
+      !details.email ||
+      !details.password ||
+      !details.userName ||
+      !details.gender
+    ) {
+      setLoading(false);
+      return toast({
+        title: "Please fill all the fields",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
 
+    try {
       // Making the post request
       let res = await axios({
         method: "POST",
-        url: `${URL}/api/auth/login`,
+        url: `${URL}/api/auth/register`,
         data: details,
       });
 
-      // Resetting the form in case of any other scenario
-      setDetails({
-        email: "",
-        password: "",
-      });
-
-      // Checking if user exists
-      if (res.data.message === "User not found") {
+      if (res.data.message === "User already exists") {
         setLoading(false);
-        // Resetting the form
         setDetails({
           email: "",
           password: "",
+          userName: "",
+          gender: "",
         });
+        // Display error toast
         return toast({
-          title: "User not found",
+          title: "User already exists with this email",
+          description: "please login",
           status: "warning",
           duration: 3000,
           isClosable: true,
         });
       }
 
-      // Checking if password is correct
-      if (res.data.message === "Invalid credentials") {
+      // Check for successful registration
+      if (res.status === 201) {
         setLoading(false);
-        // Resetting the form
-        setDetails({
-          password: "",
-          email: "",
-        });
-        return toast({
-          title: "Invalid credentials",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
-
-      // Checking if user is logged in successfully
-      if (res.data.message === "Login successful") {
-        setLoading(false);
-        // Resetting the form
+        // Reset form
         setDetails({
           email: "",
           password: "",
+          userName: "",
+          gender: "",
         });
+        //setting the login state
+        handleLogin();
+        // Display success toast
         toast({
-          title: "Login successful",
+          title: "Registered successfully",
           status: "success",
           duration: 3000,
           isClosable: true,
         });
-        //setting the login state
-        handleLogin();
+        //navigate to todos
         setTimeout(() => {
-          navigate("/weather"); 
+          navigate("/weather");
         }, 1000);
       }
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      setDetails({
+        email: "",
+        password: "",
+        userName: "",
+        gender: "",
+      });
       toast({
-        title: "An error occurred",
-        description: error.response?.data?.message || "Please try again later",
+        title: error.response.data.message,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -139,19 +131,30 @@ function Login() {
       }}
     >
       <Box
-        w={{ base: "90%", md: "60%", lg: "40%" }}
-        bg={"white"}
-        p={5}
+        w={{ base: "90%", md: "70%", lg: "50%" }}
+        p={4}
         mx="auto"
-        mt={1}
+        mt={5}
+        bg={"white"}
         borderRadius={"10px"}
         boxShadow={"rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}
       >
         <Text fontSize={"2xl"} textAlign={"center"}>
-          Login
+          Register
         </Text>
         <form onSubmit={handleSubmit}>
           <Flex direction="column">
+            <FormControl mb={4}>
+              <FormLabel>Username</FormLabel>
+              <Input
+                value={details.userName}
+                onChange={(e) =>
+                  setDetails({ ...details, userName: e.target.value })
+                }
+                type="text"
+                placeholder="Enter username"
+              />
+            </FormControl>
             <FormControl mb={4}>
               <FormLabel>Email</FormLabel>
               <Input
@@ -174,6 +177,19 @@ function Login() {
                 placeholder="Enter password"
               />
             </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Gender</FormLabel>
+              <Select
+                placeholder="Select gender"
+                value={details.gender}
+                onChange={(e) =>
+                  setDetails({ ...details, gender: e.target.value })
+                }
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </Select>
+            </FormControl>
             <span
               style={{
                 color: "blue",
@@ -181,13 +197,13 @@ function Login() {
                 marginBottom: "10px",
               }}
             >
-              <Link to="/register">{"Don't"} have an account?</Link>
+              <Link to="/login">Already have an account?</Link>
             </span>
             <Button
               type="submit"
               colorScheme="teal"
               variant="solid"
-              isDisabled={loading} // Disabling the button when loading
+              isDisabled={loading} // Disable the button when loading
             >
               {loading ? (
                 <Spinner
@@ -198,22 +214,17 @@ function Login() {
                   size="md"
                 />
               ) : (
-                "Login"
+                "Register"
               )}
             </Button>
           </Flex>
         </form>
       </Box>
-      <Button
-        colorScheme="teal"
-        size="lg"
-        mt={4}
-        onClick={() => navigate("/")}
-      >
+      <Button colorScheme="teal" size="lg" mt={4} onClick={() => navigate("/")}>
         Home Page
       </Button>
     </div>
   );
 }
 
-export default Login;
+export default Register;
